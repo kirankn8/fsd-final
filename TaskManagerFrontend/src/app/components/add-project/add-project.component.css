@@ -1,0 +1,26 @@
+.dotted-hr {
+    border-top: dotted 2px;
+}
+
+.prjt-btn {
+    width: 100%;
+}
+
+.project-list {
+    width: 100%;
+}
+
+label {
+    display: inline-block;
+    width: 200px;
+    text-align: left;
+}
+
+input:read-only { 
+  background-color: white;
+}
+
+input:disabled {
+  background-color: #e9ecef;
+  cursor: no-drop;
+}

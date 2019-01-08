@@ -1,0 +1,100 @@
+Note: On clicking "End Task" for a parent task, its child tasks will be ended automatically. The completion of a parent
+task purely depends on its child task completion. If a parent task does not have any child tasks, then the parent task
+"End Task" button is disabled.
+<br><br>
+<form class="form-inline">
+  <div class="form-group">
+    <label for="project">Project:</label>
+    <input type="text" id="project" class="form-control mx-sm-3" (click)="openProjectDialog()" aria-describedby="ProjectName"
+      [value]="selectedProject?.project" readonly>
+    <button type="button" class="btn btn-info" (click)="openProjectDialog()">Search</button>
+  </div>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <div>
+    Sort Task By:
+    <button type="button" class="btn btn-secondary" (click)="onClickSort('startDate')">Start Date</button>&nbsp;
+    <button type="button" class="btn btn-secondary" (click)="onClickSort('endDate')">End Date</button>&nbsp;
+    <button type="button" class="btn btn-secondary" (click)="onClickSort('priority')">Priority</button>&nbsp;
+    <button type="button" class="btn btn-secondary" (click)="onClickSort('status')">Completed</button>&nbsp;
+  </div>
+</form>
+<div class="dropdown-divider"></div>
+
+<table>
+  <ng-container *ngFor="let parentTask of selectedProject?.parentTasks">
+    <tr>
+      <th>Task</th>
+      <th>Parent</th>
+      <th>Priority</th>
+      <th>Start</th>
+      <th>End</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr>
+      <td>
+        <div class="card">
+          <div class="card-body">
+            {{parentTask.parentTask}}
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="card">
+          <div class="card-body">
+            This Task has NO parent
+          </div>
+        </div>
+      </td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td><button type="button" class="btn btn-primary" (click)="taskEdit(parentTask)">Edit</button></td>
+      <td><button type="button" class="btn btn-primary" (click)="markParentComplete(parentTask)" [disabled]="checkIfComplete(parentTask)">End
+          Task
+        </button>
+      </td>
+    </tr>
+    <ng-container *ngFor="let childTask of parentTask?.childTasks | search:'':sortBy">
+      <tr>
+        <th>Task</th>
+        <th>Parent</th>
+        <th>Priority</th>
+        <th>Start</th>
+        <th>End</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>
+          <div class="card">
+            <div class="card-body">
+              {{childTask.task}}
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="card">
+            <div class="card-body">
+              {{parentTask.parentTask}}
+            </div>
+          </div>
+        </td>
+        <td>{{childTask.priority}}</td>
+        <td>{{childTask.startDate | date:'shortDate'}}</td>
+        <td>{{childTask.endDate | date:'shortDate'}}</td>
+        <td>
+          <button type="button" class="btn btn-primary" (click)="taskEdit(parentTask, childTask)" [disabled]="childTask?.status ==='Complete'">
+            Edit
+          </button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-primary" (click)="markChildComplete(parentTask._id, childTask._id)"
+            [disabled]="childTask?.status ==='Complete'">
+            End Task
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+  </ng-container>
+</table>

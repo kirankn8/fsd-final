@@ -1,0 +1,30 @@
+version: '3'
+services:
+  frontend: 
+    container_name: taskmanager-frontend
+    restart: always
+    build: ./TaskManagerFrontend/
+    ports:
+      - "4200:80"
+    depends_on: 
+      - backend
+  backend:
+    container_name: taskmanager-backend
+    restart: always
+    build: ./TaskManagerBackend/
+    volumes:
+      - ./:/app
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+  mongo:
+    image: mongo
+    container_name: "mongodb"
+    ports:
+      - "27017:27017"
+    # environment:
+    #   - MONGO_DATA_DIR=/data/db
+    #   - MONGO_LOG_DIR=/dev/null
+    # volumes:
+    #   - ./data/db:/data/db

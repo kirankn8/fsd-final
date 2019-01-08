@@ -1,0 +1,97 @@
+<form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="project-name">Project:</label>
+      <input type="text" formControlName="project" id="project-name" class="form-control mx-sm-3" aria-describedby="ProjectName">
+    </div>
+  </div>
+  <br>
+  <div class="form-inline">
+    <div class="form-group form-check">
+      <input type="checkbox" formControlName="defaultDate" class="form-check-input" id="date-checkbox" (ngModelChange)="onSelectionChange($event)">
+      <label class="form-check-label" for="date-checkbox">Set Start and End Date</label>
+      <input type="date" formControlName="startDate" id="start-date" class="form-control mx-sm-3" aria-describedby="startDate"
+        placeholder="Start Date">
+      <input type="date" formControlName="endDate" id="end-date" class="form-control mx-sm-3" aria-describedby="endDate"
+        placeholder="End Date">
+    </div>
+  </div>
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="priority">Priority: ({{projectForm.value.priority}})</label>
+      <input type="range" formControlName="priority" class="custom-range" value="0" min="0" max="30" step="1" id="priority">
+    </div>
+  </div>
+  <br>
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="manager">Manager:</label>
+      <input type="text" formControlName="manager" id="manager" class="form-control mx-sm-3" (click)="openManagerDialog()"
+        aria-describedby="ManagerName" readonly>
+      <button type="button" class="btn btn-info" (click)="openManagerDialog()">Search</button>
+    </div>
+  </div>
+  <br>
+  <div>
+    <button type="submit" class="btn btn-primary">{{isEditMode? 'Edit':'Add'}}</button>
+    &nbsp;
+    <button type="button" class="btn btn-dark" (click)="resetProjectForm()">Reset</button>
+  </div>
+</form>
+
+<div class="dropdown-divider"></div>
+
+<div>
+  <div class="form-group">
+    <input type="search" [(ngModel)]="searchValue" class="form-control" id="search" aria-describedby="searchInput"
+      placeholder="Search...">
+  </div>
+</div>
+<div>
+  Sort By:
+  <button type="button" class="btn btn-secondary" (click)="onClickSort('startDate')">Start Date</button>&nbsp;
+  <button type="button" class="btn btn-secondary" (click)="onClickSort('endDate')">End Date</button>&nbsp;
+  <button type="button" class="btn btn-secondary" (click)="onClickSort('priority')">Priority</button>&nbsp;
+  <button type="button" class="btn btn-secondary" (click)="onClickSort('completed')">Completed</button>&nbsp;
+</div>
+<div *ngFor="let project of projectList | search:searchValue:sortBy">
+  <div class="row">
+    <div class="col-6">
+      <br>
+      <div class="card">
+        <div class="card-body">
+          Project: {{project.project}}
+          <br><br>
+          <table class="project-list">
+            <tr>
+              <td>No. of Tasks: {{project.parentTasks.length}}</td>
+              <td>Completed: {{ project.completed }}</td>
+            </tr>
+            <tr>
+              <td>Start Date: {{project.startDate | date:'shortDate'}}</td>
+              <td>End Date:{{project.endDate | date:'shortDate'}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <br><br>
+      Priority:
+      <div class="card">
+        <div class="card-body">
+          <br>
+          {{project.priority}}
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <br>
+      <button type="button" class="btn btn-secondary prjt-btn" (click)="enableProjectEdit(project)">Edit</button>
+      <br><br>
+      <button type="button" class="btn btn-secondary prjt-btn" (click)="deleteProjectFromList(project._id)">Delete</button>
+    </div>
+  </div>
+  <hr class="
+        dotted-hr" />
+</div>

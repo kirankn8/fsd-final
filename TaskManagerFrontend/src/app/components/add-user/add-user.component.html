@@ -1,0 +1,61 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="first-name">First Name:</label>
+      <input formControlName="firstName" type="text" id="first-name" class="form-control mx-sm-3" aria-describedby="FirstName">
+    </div>
+  </div>
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="last-name">Last Name:</label>
+      <input formControlName="lastName" type="text" id="last-name" class="form-control mx-sm-3" aria-describedby="LastName">
+    </div>
+  </div>
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="employee-id">Employee ID:</label>
+      <input formControlName="employeeId" type="text" id="employee-id" class="form-control mx-sm-3" aria-describedby="EmployeeID">
+    </div>
+  </div>
+  <br>
+  <div>
+    <button id="add-edit-user-btn" type="submit" class="btn btn-primary">
+      {{isEditMode? 'Edit':'Add'}}
+    </button>
+    &nbsp;
+    <button id="reset-btn" type="button" class="btn btn-dark" (click)="resetUserForm()">Reset</button>
+  </div>
+</form>
+<div class="dropdown-divider"></div>
+
+<div class="form-inline">
+  <div class="form-group">
+    <input type="text" id="search" [(ngModel)]="searchValue" class="form-control mx-sm-3" aria-describedby="Search"
+      placeholder="Search...">
+  </div>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <div>
+    Sort:
+    <button id="sort-fn" type="button" class="btn btn-secondary" (click)="onClickSort('firstName')">First Name</button>&nbsp;
+    <button id="sort-ln" type="button" class="btn btn-secondary" (click)="onClickSort('lastName')">Last Name</button>&nbsp;
+    <button id="sort-id" type="button" class="btn btn-secondary" (click)="onClickSort('employeeId')">Id</button>&nbsp;
+  </div>
+</div>
+<hr class="dotted-hr" />
+<div *ngFor="let user of userList | search:searchValue:sortBy">
+  <div class="row">
+    <div class="col-8">
+      <ul class="list-group">
+        <li class="list-group-item">First Name: {{user.firstName}}</li>
+        <li class="list-group-item">Last Name: {{user.lastName}}</li>
+        <li class="list-group-item">Employee Id: {{user.employeeId}}</li>
+      </ul>
+    </div>
+    <div class="col-4">
+      <button type="button" class="btn btn-secondary user-btn" (click)="enableUserEdit(user)">Edit</button>
+      <br><br>
+      <button type="button" class="btn btn-secondary user-btn" (click)="deleteUserFromList(user._id)">Delete</button>
+    </div>
+  </div>
+  <hr class="dotted-hr" />
+</div>

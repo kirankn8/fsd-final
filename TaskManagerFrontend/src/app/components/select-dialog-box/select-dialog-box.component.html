@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>{{info.title}}</h2>
+
+<mat-dialog-content class="mat-typography">
+  <div class="div-inline" align="end">
+    <div class="div-group">
+      <input type="text" id="search" [(ngModel)]="searchValue" class="div-control" aria-describedby="Search"
+        placeholder="Search...">
+    </div>
+  </div>
+  <div class="list-group">
+    <ng-container *ngFor="let listItem of info.genericList | search:searchValue | exceptionId: info.exceptionIdList">
+      <button class="list-group-item list-group-item-action" type="button" [mat-dialog-close]="listItem">
+        {{listItem[info.prop]}}</button>
+    </ng-container>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button id="dialog-close-btn" mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

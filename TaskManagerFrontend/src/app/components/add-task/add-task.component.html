@@ -1,0 +1,62 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="project">Project:</label>
+      <input type="text" formControlName="project" id="project" class="form-control mx-sm-3" (click)="openProjectDialog()"
+        aria-describedby="ProjectName" readonly>
+      <button type="button" class="btn btn-info" (click)="openProjectDialog()">Search</button>
+    </div>
+  </div>
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="task-name">Task:</label>
+      <input type="text" formControlName="task" id="task-name" class="form-control mx-sm-3" aria-describedby="TaskName">
+    </div>
+  </div>
+  <div>
+    <div class="form-group form-check">
+      <input type="checkbox" formControlName="isParentTask" class="form-check-input" id="parent-task-check"
+        (ngModelChange)="onSelectionChange($event)">
+      <label class="form-check-label" for="parent-task-check">Parent Task</label>
+    </div>
+  </div>
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="priority">Priority: <span *ngIf="taskForm.value.priority != null">({{taskForm.value.priority}})</span></label>
+      <input type="range" formControlName="priority" class="custom-range" min="0" max="30" step="1" value="0" id="priority">
+    </div>
+  </div>
+  <br>
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="parent-task">Parent Task:</label>
+      <input type="text" formControlName="parentTask" id="parent-task" (click)="openTaskDialog()" class="form-control mx-sm-3"
+        aria-describedby="parentTask" readonly>
+      <button type="button" class="btn btn-info" (click)="openTaskDialog()" [disabled]="this.taskForm.value.isParentTask">Search</button>
+    </div>
+  </div>
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="start-date">Start Date:</label>
+      <input type="date" formControlName="startDate" id="start-date" class="form-control mx-sm-3" aria-describedby="StartDate">
+    </div>
+    <div class="form-group">
+      <label for="end-date">End Date:</label>
+      <input type="date" formControlName="endDate" id="end-date" class="form-control mx-sm-3" aria-describedby="EndDate">
+    </div>
+  </div>
+  <div class="form-inline">
+    <div class="form-group">
+      <label for="user">User:</label>
+      <input type="text" formControlName="user" id="user" class="form-control mx-sm-3" (click)="openUserDialog()"
+        aria-describedby="user" readonly>
+      <button type="button" class="btn btn-info" (click)="openUserDialog()">Search</button>
+    </div>
+  </div>
+  <br>
+  <div>
+    <button type="submit" class="btn btn-primary">Add Task</button>
+    &nbsp;
+    <button type="button" class="btn btn-dark" (click)="resetTaskForm()">Reset</button>
+  </div>
+</form>
