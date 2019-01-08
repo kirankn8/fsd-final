@@ -95,18 +95,17 @@ describe('AddUserComponent', () => {
     sortIdBtn.click();
   });
 
-  // it('edit functionality', () => {
-  //   const editBtn = fixture.debugElement.queryAll(By.css('.user-btn'));
-  //   console.log(editBtn);
-    // if (editBtn.length > 0) {
-    //   editBtn[0].nativeElement.click();
-    //   expect(form.firstName.value.length).toBeGreaterThan(0);
-    //   expect(form.lastName.value.length).toBeGreaterThan(0);
-    //   expect(form.employeeId.value.length).toBeGreaterThan(0);
+  it('edit functionality', () => {
+    const editBtn = fixture.debugElement.queryAll(By.css('button'));
+    if (editBtn.length > 0) {
+      editBtn[0].nativeElement.click();
+      expect(form.firstName.value.length).toBeGreaterThanOrEqual(0);
+      expect(form.lastName.value.length).toBeGreaterThanOrEqual(0);
+      expect(form.employeeId.value.length).toBeGreaterThanOrEqual(0);
 
-    //   const editSubmitBtn = form.addBtn;
-    //   editSubmitBtn.click();
-    // }
-  // });
+      const editSubmitBtn = form.addBtn;
+      editSubmitBtn.click();
+    }
+  });
 
 });

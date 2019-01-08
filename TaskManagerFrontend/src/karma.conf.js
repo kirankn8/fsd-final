@@ -26,7 +26,7 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: true,
+    singleRun: false,
     files: [
       '../node_modules/bootstrap/dist/css/bootstrap.min.css'
     ],
