@@ -1,5 +1,5 @@
-# fsd-caps
-FSD caps program
+# fsd-final
+FSD final program
 
 ### Executing the Application
 
@@ -15,4 +15,4 @@ FSD caps program
     >Note: Incase docker-compose is failing please consider deleting all the existing containers and restarting docker.
 
 ### Github link: 
-- https://github.com/kirankn8/fsd-caps.git
+- https://github.com/kirankn8/fsd-final.git

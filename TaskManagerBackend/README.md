@@ -8,7 +8,7 @@ Load testing has been carried out using [pm2](http://pm2.keymetrics.io/) - produ
 
 ### Command Used
 ```
-jmeter -g "C:\Users\username\Desktop\fsd-caps\TaskManagerBackend\summary.csv" -o "C:\Users\username\Desktop\fsd-caps\TaskManagerBackend\HTMLReports"
+jmeter -g "C:\Users\<username>\fsd-final\TaskManagerBackend\summary.csv" -o "C:\Users\<username>\fsd-final\TaskManagerBackend\HTMLReports"
 ```
 
 Reports can be found at ./JmeterReports directory
