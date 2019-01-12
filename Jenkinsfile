@@ -17,7 +17,7 @@ pipeline {
         stage('Testing Task Manager Frontend') {
             steps {
                 echo 'Testing Task Manager Frontend...'
-                // bat 'npm install pm2 -g'
+                bat 'npm install pm2 -g'
                 // bat 'pm2 start ./TaskManagerBackend/index.js'
                 // bat 'cd ./TaskManagerFrontend/ && npm test --single-run true --watch=false' 
                 // bat 'pm2 stop index'               
@@ -26,7 +26,7 @@ pipeline {
         stage('Testing Task Manager Backend') {
             steps {
                 echo 'Testing Backend...'
-                // bat 'cd ./TaskManagerBackend/ && npm test'
+                bat 'cd ./TaskManagerBackend/ && npm test'
             }
         }
         stage('Deploy') {
